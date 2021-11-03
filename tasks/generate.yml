@@ -57,7 +57,7 @@
   when: ssl_certs_ca_cert is defined
 
 - name: Generate self-signed SSL certificate without CA Cert
-  command: "openssl x509 -req -config {{ ssl_certs_conf_path }} -nodes -days {{ ssl_certs_days }} -in {{ ssl_certs_csr_path }} -key {{ ssl_certs_privkey_path }} -out {{ ssl_certs_cert_path }} -extensions v3_ca"
+  command: "openssl req -config {{ ssl_certs_conf_path }} -nodes -x509 -sha256 -days {{ ssl_certs_days }} -in {{ ssl_certs_csr_path }} -key {{ ssl_certs_privkey_path }} -out {{ ssl_certs_cert_path }} -extensions v3_ca"
   args:
     creates: "{{ ssl_certs_cert_path }}"
   when: ssl_certs_ca_cert is not defined
