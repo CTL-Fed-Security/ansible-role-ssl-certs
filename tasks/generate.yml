@@ -51,7 +51,7 @@
     mode: "{{ ssl_certs_mode }}"
 
 - name: Generate self-signed SSL certificate w/ CA Cert
-  command: "openssl x509 -req -in {{ ssl_certs_csr_path }} -CA {{ ssl_cert_ca_cert }} -CAkey {{ ssl_cert_ca_key }} -CAcreateserial -out {{ ssl_certs_cert_path }} -days {{ ssl_certs_days }} -extensions v3_ca"
+  command: "openssl x509 -req -in {{ ssl_certs_csr_path }} -CA {{ ssl_cert_ca_cert }} -CAkey {{ ssl_cert_ca_key }} -CAcreateserial -out {{ ssl_certs_cert_path }} -days 3650 -extensions req_ext -extfile {{ ssl_certs_conf_path }}"
   args:
     creates: "{{ ssl_certs_cert_path }}"
   when: ssl_certs_ca_cert is defined
