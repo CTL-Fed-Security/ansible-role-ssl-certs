@@ -1,6 +1,6 @@
 - name: Copy Certificate Authority key file (if required)
   copy:
-    src: "{{ ssl_certs_ca_privkey }}"
+    content: "{{ ssl_certs_ca_privkey }}"
     dest: "{{ ssl_certs_ca_privkey_path }}"
     owner: "{{ ssl_certs_path_owner }}"
     group: "{{ ssl_certs_path_group }}"
@@ -10,7 +10,7 @@
 
 - name: Copy Certificate Authority certificate file (if required)
   copy:
-    src: "{{ ssl_certs_ca_cert }}"
+    content: "{{ ssl_certs_ca_cert }}"
     dest: "{{ ssl_certs_ca_cert_path }}"
     owner: "{{ ssl_certs_path_owner }}"
     group: "{{ ssl_certs_path_group }}"
