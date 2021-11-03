@@ -1,12 +1,7 @@
 ansible-role-ssl-certs
 ======================
 
-## @jdauphant : I don't have time to manage anymore this role. Don't hesitate to fork and made your own version.
-
-
 Generate and/or deploy SSL certificate
-
-Available on Ansible Galaxy: [jdauphant.ssl-certs](https://galaxy.ansible.com/jdauphant/ssl-certs/)
 
 # Examples
 
@@ -15,7 +10,7 @@ Available on Ansible Galaxy: [jdauphant.ssl-certs](https://galaxy.ansible.com/jd
 ```YAML
  - hosts: all
    roles:
-     - jdauphant.ssl-certs
+     - CTL-Fed-Security.ssl-certs
 ```
 
 This will create certificate and private key in:
@@ -23,12 +18,22 @@ This will create certificate and private key in:
 - `/etc/ssl/myserver.mydomain.com.key`
 - `/etc/ssl/myserver.mydomain.com.pem`
 
-## Example to deploy a SSL certificate
+## Example to generate a self-signed SSL certificate using your own Certificate Authorities
 
 ```YAML
  - hosts: all
    roles:
-    - role: jdauphant.ssl-certs
+     - role: CTL-Fed-Security.ssl-certs
+       ssl_certs_ca_privkey: "{{ ca_privkey_content }}"
+       ssl_certs_ca_cert: "{{ ca_cert_content }}"
+```
+
+## Example to deploy your own SSL certificate
+
+```YAML
+ - hosts: all
+   roles:
+    - role: CTL-Fed-Security.ssl-certs
       ssl_certs_common_name: "example.com"
 ```
 
@@ -36,13 +41,12 @@ The certificate has to be placed in `files/ssl/example.com.key` and `files/ssl/e
 they don't exist, the key and a **self-signed** certificate will be generated at
 `/etc/ssl/example.com/example.com.key` and `/etc/ssl/example.com/example.com.pem` using the provided common name.
 
-
 ## Example to deploy a SSL certificate using local key/pem files
 
 ```YAML
  - hosts: all
    roles:
-    - role: jdauphant.ssl-certs
+    - role: CTL-Fed-Security.ssl-certs
       ssl_certs_local_privkey_path: '/path/to/example.com.key'
       ssl_certs_local_cert_path: '/path/to/example.com.pem'
 ```
@@ -72,12 +76,12 @@ ssl_certs_local_cert_data: |
 
 Then simply include the role as in the first example.
 
-## Example to use this role with my Nginx role: [jdauphant.nginx](https://github.com/jdauphant/ansible-role-nginx)
+## Example to use this role with Nginx role: [jdauphant.nginx](https://github.com/jdauphant/ansible-role-nginx)
 
 ```YAML
  - hosts: all
    roles:
-     - role: jdauphant.ssl-certs
+     - role: CTL-Fed-Security.ssl-certs
        ssl_certs_generate_dh_param: true
      - role: jdauphant.nginx
        nginx_configs:
