@@ -21,8 +21,8 @@ ssl_certs_combined_path: "{{ ssl_certs_path }}/{{ ssl_certs_common_name }}.combi
 ssl_certs_dhparam_path: "{{ ssl_certs_path }}/dhparam.pem"
 ssl_certs_mode: "0700"
 ssl_certs_force_replace: yes
-ssl_certs_ca_privkey_path: "{{ ssl_certs_path }}/cyclops_root_ca.key"
-ssl_certs_ca_cert_path: "{{ ssl_certs_path }}/cyclops_root_ca.pem"
+ssl_certs_ca_privkey_path: "{{ ssl_certs_path }}/ca_cert_key.key"
+ssl_certs_ca_cert_path: "{{ ssl_certs_path }}/ca_cert.pem"
 
 ssl_certs_local_privkey_path: "{{ inventory_dir|default(playbook_dir) }}/files/ssl/{{ ssl_certs_common_name}}.key"
 ssl_certs_local_cert_path: "{{ inventory_dir|default(playbook_dir) }}/files/ssl/{{ ssl_certs_common_name }}.pem"
