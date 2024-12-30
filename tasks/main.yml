@@ -36,7 +36,7 @@
     when: stat_privkey.stat.exists and not stat_cert.stat.exists
     tags: [ssl-certs,configuration]
 
-  - include: generate.yml
+  - include_tasks: generate.yml
     when: >
       ( not stat_privkey.stat.exists and not stat_cert.stat.exists )
       and ( ssl_certs_local_privkey_data == '' and ssl_certs_local_cert_data == '' )
